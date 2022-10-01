@@ -1,16 +1,19 @@
-# moodi
+# Moodi
 
-A new Flutter project.
+Moodi is a mood tracker written in Flutter
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To build the .apk for android:
 
-A few resources to get you started if this is your first Flutter project:
+`flutter build apk`
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Feel free to pick or create issues.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Contributing
+
+Please read `CONTRIBUTING.md`
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
