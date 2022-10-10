@@ -39,7 +39,7 @@ class _MainHeaderState extends State<MainHeader> {
           ),
           TextButton(
               onPressed: () {
-                // TODO: Implement
+                Navigator.pushNamed(context, '/checkin');
               },
               style: ButtonStyle(
                 padding: MaterialStateProperty.all<EdgeInsets>(
