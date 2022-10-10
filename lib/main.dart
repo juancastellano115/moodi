@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:moodi/main_header.dart';
+import 'package:moodi/pages/check_in.dart';
+import 'package:moodi/pages/home.dart';
 import 'package:moodi/recent_activity.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -29,17 +31,21 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: AnimatedSplashScreen(
-        duration: 3000,
-        splash: const Text(
-          "Moodi",
-          style: TextStyle(color: Colors.black87, fontSize: 30),
-        ),
-        backgroundColor: Colors.white,
-        nextScreen: const HomePage(),
-        splashTransition: SplashTransition.fadeTransition,
-        pageTransitionType: PageTransitionType.fade,
-      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => AnimatedSplashScreen(
+              duration: 3000,
+              splash: const Text(
+                "Moodi",
+                style: TextStyle(color: Colors.black87, fontSize: 30),
+              ),
+              backgroundColor: Colors.white,
+              nextScreen: const HomePage(),
+              splashTransition: SplashTransition.fadeTransition,
+              pageTransitionType: PageTransitionType.fade,
+            ),
+        '/checkin': (context) => const CheckIn(),
+      },
     );
   }
 }
@@ -64,31 +70,29 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 251, 251, 251),
-      body: SafeArea(
-        child: Column(
-          children: const [
-            Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: MainHeader()),
-            RecentActivity()
-          ],
+      body: const SafeArea(child: Home()),
+      bottomNavigationBar: Theme(
+        data: ThemeData(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        elevation: 5,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.area_chart),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: '',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.black54,
-        onTap: _onItemTapped,
+        child: BottomNavigationBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.area_chart),
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: '',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.teal[300],
+          onTap: _onItemTapped,
+        ),
       ),
       floatingActionButton: NeumorphicFloatingActionButton(
         onPressed: () {
