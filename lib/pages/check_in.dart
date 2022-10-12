@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
+import 'mood_display.dart';
+
 class CheckIn extends StatefulWidget {
   const CheckIn({Key? key}) : super(key: key);
 
@@ -9,6 +11,8 @@ class CheckIn extends StatefulWidget {
 }
 
 class _CheckInState extends State<CheckIn> {
+  double _sliderValue = 50.0;
+
   @override
   Widget build(BuildContext context) {
     return NeumorphicTheme(
@@ -19,7 +23,7 @@ class _CheckInState extends State<CheckIn> {
             buttonStyle: NeumorphicStyle(
               boxShape: NeumorphicBoxShape.circle(),
               shape: NeumorphicShape.concave,
-              depth: 8,
+              depth: 3,
               intensity: 1,
             ),
             textStyle: TextStyle(color: Colors.black, fontSize: 20),
@@ -39,24 +43,36 @@ class _CheckInState extends State<CheckIn> {
               alignment: Alignment.center,
               child: Text("How are you feeling today?"),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                    onPressed: () => {}, child: const Text("Awesome")),
-                ElevatedButton(onPressed: () => {}, child: const Text("Fine")),
-                ElevatedButton(onPressed: () => {}, child: const Text("Bored")),
-              ],
+            MoodDisplay(
+              value: _sliderValue,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ElevatedButton(
-                    onPressed: () => {}, child: const Text("Normal")),
-                ElevatedButton(onPressed: () => {}, child: const Text("Down")),
-                ElevatedButton(onPressed: () => {}, child: const Text("Bad")),
-              ],
+            NeumorphicSlider(
+              height: 17,
+              min: 0,
+              max: 100,
+              value: _sliderValue,
+              onChanged: (value) {
+                setState(() => _sliderValue = value);
+              },
             ),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 15, left: 20, top: 30),
+              child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text("Do you want to add something?")),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Neumorphic(
+                  child: const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: TextField(
+                  maxLines: 8, //or null
+                  decoration: InputDecoration.collapsed(
+                      hintText: "Enter your text here"),
+                ),
+              )),
+            )
           ],
         ),
       ),
